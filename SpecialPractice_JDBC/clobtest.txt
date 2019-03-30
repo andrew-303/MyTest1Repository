@@ -1,0 +1,47 @@
+
+		try {
+				if(rs != null){
+				rs.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}finally{
+			if(st != null){
+				try {
+					st.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}if(conn != null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	
+}
+tic{
+		System.out.println("JdbcUtils静态代码块");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new ExceptionInInitializerError(e);
+		}
+	}
+	
+	//2.建立连接
+	public static Connection getConnection() throws SQLException{
+		System.out.println("JdbcUtils建立连接的方法");
+		return DriverManager.getConnection(url, user, password);
+	}
+	
+	//6.关闭连接
+	public static void closeConnection(ResultSet rs ,Statement st,Connection conn){
+		System.out.println("JdbcUtils关闭连接的方法");
